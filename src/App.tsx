@@ -1,22 +1,12 @@
 import React from 'react';
-import { MaterialButton } from './Material-Button';
+import { Login } from './login/Login';
 import './App.css';
 
-
-class BaseWrapComponent extends React.Component {
-  render() {
-    return (
-      <>
-        <MaterialButton text="PIYO"/>
-      </>
-    );
-  }
-}
 
 const App: React.FC = () => {
   return (
     <div className="main">
-      <BaseWrapComponent />
+      <Login />
     </div>
   );
 }
