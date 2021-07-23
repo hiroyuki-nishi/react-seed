@@ -6,11 +6,7 @@ export class Login extends React.Component {
     return (
       <>
         <form noValidate autoComplete="off">
-          <MaterialInput />
-          <MaterialInput />
-          {/* <TextField id="standard-basic" label="Standard" />
-          <TextField id="filled-basic" label="Filled" variant="filled" />
-          <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
+          <MaterialInput label="aa" variant="standard" />
         </form>
       </>
     );
