@@ -1,23 +1,13 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import { MaterialButton } from './Material-Button';
 import './App.css';
 
 
-class Hoge extends React.Component {
-  render() {
-    return (
-      <Button variant="contained" color="primary">
-        Hello World
-      </Button>
-    )
-  }
-}
-
-class AdmissionFeeCalculator extends React.Component {
+class BaseWrapComponent extends React.Component {
   render() {
     return (
       <>
-        <Hoge />
+        <MaterialButton text="PIYO"/>
       </>
     );
   }
@@ -26,7 +16,7 @@ class AdmissionFeeCalculator extends React.Component {
 const App: React.FC = () => {
   return (
     <div className="main">
-      <AdmissionFeeCalculator />
+      <BaseWrapComponent />
     </div>
   );
 }
