@@ -3,6 +3,7 @@ import { TextField } from '@material-ui/core';
 
 interface MaterialInputProps {
   formName: string;
+  inputProps?: { maxLength: number, pattern?: string }
   label: string;
   variant: "standard" | "filled" | "outlined" | undefined;
   changeValue: (formName: string, value: string) => void
@@ -14,7 +15,7 @@ export const MaterialInput = (props: MaterialInputProps) => {
   };
 
   return (<TextField
-    inputProps={{ maxLength: 4, pattern: "^[a-zA-Z0-9_]+$" }}
+    inputProps={props?.inputProps}
     label={props.label}
     variant={props.variant}
     onChange={handleChange}
