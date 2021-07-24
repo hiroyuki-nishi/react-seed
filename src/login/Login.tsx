@@ -1,30 +1,33 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import { MaterialButton } from '../common/button/MaterialButton';
 import { MaterialInput } from '../common/input/MaterialInput';
+import { LoginRequest } from '../common/model/LoginModel';
+import { LoginService } from '../common/service/LoginService';
+
 
 export const Login = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const history = useHistory();
+  const loginService = new LoginService()
 
   const formChange = (formName: string, value: string) => {
     switch (formName) {
       case 'email':
         setEmail(value);
-        console.log(email, name)
         break;
       case 'name':
         setName(value);
-        console.log(email, name)
         break;
       default:
         console.log('key not found');
     }
   };
 
-  const onLogin = () => {
-    console.log("login")
-    console.log(email, name)
-  }
+  const onLogin = () => 
+    loginService.login(new LoginRequest(email, name), () => history.push('/home'))
 
   return (
     <>

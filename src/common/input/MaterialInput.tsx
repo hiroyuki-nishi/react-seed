@@ -7,6 +7,10 @@ interface MaterialInputProps {
   label: string;
   variant: "standard" | "filled" | "outlined" | undefined;
   changeValue: (formName: string, value: string) => void
+  /**
+   * 1. エラー表示を追加
+   * 2. スタイルを追加
+   */
 }
 
 export const MaterialInput = (props: MaterialInputProps) => {
