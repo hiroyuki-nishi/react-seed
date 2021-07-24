@@ -1,3 +1,4 @@
+import { Grid } from '@material-ui/core';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -31,26 +32,33 @@ export const Login = () => {
 
   return (
     <>
-      <form noValidate autoComplete="off">
-        <div>
-          <MaterialInput
-            formName="email"
-            inputProps={{ maxLength: 128 }}
-            label="email"
-            variant="standard"
-            changeValue={formChange}
-          />
-        </div>
-        <div>
-          <MaterialInput
-            formName="name"
-            label="name"
-            variant="standard"
-            changeValue={formChange}
-          />
-        </div>
-        <MaterialButton text="ログイン" onClick={onLogin}/>
-      </form>
+    {/* TODO: レイアウト部品を作成する */}
+      <Grid container direction="column" alignItems="center" justify="center">
+        <Grid item xs={8}>
+          <form noValidate autoComplete="off">
+            <div>
+              <MaterialInput
+                formName="email"
+                inputProps={{ maxLength: 128 }}
+                label="email"
+                variant="standard"
+                changeValue={formChange}
+              />
+            </div>
+            <div>
+              <MaterialInput
+                formName="name"
+                label="name"
+                variant="standard"
+                changeValue={formChange}
+              />
+            </div>
+            <div>
+              <MaterialButton text="ログイン" onClick={onLogin} />
+            </div>
+          </form>
+        </Grid>
+      </Grid>
     </>
   );
 }

@@ -6,11 +6,13 @@ import { Login } from './login/Login';
 import './App.css';
 import { Home } from './home/Home';
 import { NotFound } from './error/NotFound';
+import { Header } from './header/Header';
 
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
+      <Header visible={true} />
       <Switch>
         <Route exact path="/">
           <div className="main">
