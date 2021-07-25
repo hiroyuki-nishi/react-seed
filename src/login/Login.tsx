@@ -54,7 +54,7 @@ export const Login = () => {
               />
             </div>
             <div>
-              <MaterialButton text="ログイン" onClick={onLogin} />
+              <MaterialButton text="ログイン" color="primary" variant="contained" onClick={onLogin} />
             </div>
           </form>
         </Grid>

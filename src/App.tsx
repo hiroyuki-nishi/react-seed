@@ -6,13 +6,14 @@ import { Login } from './login/Login';
 import './App.css';
 import { Home } from './home/Home';
 import { NotFound } from './error/NotFound';
-import { Header } from './header/Header';
+// import { Header } from './header/Header';
+import { LoopComponent } from './loop/Loop';
 
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <Header visible={true} />
+      {/* <Header visible={true} /> */}
       <Switch>
         <Route exact path="/">
           <div className="main">
@@ -21,6 +22,9 @@ const App: React.FC = () => {
         </Route>
         <Route exact path="/home">
           <Home />
+        </Route>
+        <Route exact path="/loop">
+          <LoopComponent />
         </Route>
         <Route>
           <NotFound />
