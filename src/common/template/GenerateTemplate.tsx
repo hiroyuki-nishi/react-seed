@@ -1,6 +1,6 @@
 import AppBar from "@material-ui/core/AppBar";
 import * as colors from "@material-ui/core/colors";
-import Container from "@material-ui/core/Container";
+// import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
@@ -80,9 +80,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       flexGrow: 1,
-    },
-    pageTitle: {
-      marginBottom: theme.spacing(1),
     },
     drawerPaper: {
       position: "relative",
@@ -177,19 +174,8 @@ export const GenericTemplate: React.FC<GenericTemplateProps> = (props) => {
 
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Container maxWidth="lg">
-            <Typography
-              component="h2"
-              variant="h5"
-              color="inherit"
-              noWrap
-              className={classes.pageTitle}
-            >
-              {/* SubHeader */}
-            {props?.subHeader}
-            </Typography>
-            {props.children}
-          </Container>
+          {props?.subHeader}
+          {props.children}
         </main>
       </div>
     </ThemeProvider>

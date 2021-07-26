@@ -1,4 +1,4 @@
-import { Grid, IconButton, Toolbar } from "@material-ui/core";
+import { Container, Grid, IconButton, Toolbar } from "@material-ui/core";
 import GridOnIcon from '@material-ui/icons/GridOn';
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -8,11 +8,11 @@ import { DeviceCard } from "./DeviceCard";
 
 const useStyles = makeStyles({
   toolbar: {
-    minHeight: `36px`, // minHeight を再設定する
+    minHeight: "36px",
   },
   rightToolbar: {
     marginLeft: "auto",
-    marginRight: -18
+    marginRight: -12
   }
 })
 
@@ -26,6 +26,7 @@ export const Device = () => {
   return (
     <GenericTemplate subHeader={
       <>
+      {/* TODO 部品切り出し */}
       <Toolbar className={classes.toolbar}>
         <section className={classes.rightToolbar}>
           <IconButton color="inherit">
@@ -35,9 +36,11 @@ export const Device = () => {
       </Toolbar>
       </>
      }>
-      <Grid container spacing={2}>
-        {deviceCards}
-      </Grid>
+      <Container maxWidth="lg">
+        <Grid container spacing={2}>
+          {deviceCards}
+        </Grid>
+      </Container>
     </GenericTemplate>
   );
 };
