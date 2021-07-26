@@ -1,6 +1,5 @@
 import AppBar from "@material-ui/core/AppBar";
 import * as colors from "@material-ui/core/colors";
-// import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
@@ -16,28 +15,11 @@ import clsx from "clsx";
 import React from "react";
 
 import { SideMenu } from "./Menu";
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, Menu, MenuItem } from "@material-ui/core";
 
 const drawerWidth = 240;
 
 const theme = createMuiTheme({
-  typography: {
-    fontFamily: [
-      "Noto Sans JP",
-      "Lato",
-      "游ゴシック Medium",
-      "游ゴシック体",
-      "Yu Gothic Medium",
-      "YuGothic",
-      "ヒラギノ角ゴ ProN",
-      "Hiragino Kaku Gothic ProN",
-      "メイリオ",
-      "Meiryo",
-      "ＭＳ Ｐゴシック",
-      "MS PGothic",
-      "sans-serif",
-    ].join(","),
-  },
   palette: {
     primary: { main: colors.pink[800] }, // テーマの色
   },
@@ -132,12 +114,12 @@ export interface GenericTemplateProps {
 export const GenericTemplate: React.FC<GenericTemplateProps> = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleDrawerOpen = () => setOpen(true);
+  const handleDrawerClose = () => setOpen(false);
+  const handleClick = (event: any) => setAnchorEl(event.currentTarget);
+  const handleClose = () => setAnchorEl(null);
 
   return (
     <ThemeProvider theme={theme}>
@@ -161,7 +143,19 @@ export const GenericTemplate: React.FC<GenericTemplateProps> = (props) => {
             <MenuIcon />
             </IconButton>
             <Typography className={classes.title}></Typography>
-            <AccountCircleOutlinedIcon />
+            <IconButton color="inherit" onClick={handleClick} >
+              <AccountCircleOutlinedIcon />
+            </IconButton>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>アカウント設定</MenuItem>
+              <MenuItem onClick={handleClose}>ログアウト</MenuItem>
+            </Menu>
           </Toolbar>
         </AppBar>
         <Drawer

@@ -19,7 +19,7 @@ const App: React.FC = () => {
             <Login />
           </div>
         </Route>
-        <Route exact path="/home">
+        <Route exact path="/device">
           <Device />
         </Route>
         <Route>

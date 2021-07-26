@@ -17,6 +17,7 @@ export const Device = () => {
   return (
     <GenericTemplate subHeader={
       <>
+        {/* TODO: 部品化する */}
         <IconButton color="inherit" onClick={() => setHidden(!hidden)}>
           <CodeIcon />
         </IconButton>
