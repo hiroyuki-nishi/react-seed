@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Login } from './login/Login';
 
 import './App.css';
-import { Home } from './home/Home';
+import { Device } from './device/Device';
 import { NotFound } from './error/NotFound';
 // import { Header } from './header/Header';
 import { LoopComponent } from './loop/Loop';
@@ -21,7 +21,7 @@ const App: React.FC = () => {
           </div>
         </Route>
         <Route exact path="/home">
-          <Home />
+          <Device />
         </Route>
         <Route exact path="/loop">
           <LoopComponent />

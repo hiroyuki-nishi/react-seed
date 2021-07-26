@@ -38,7 +38,7 @@ const theme = createMuiTheme({
     ].join(","),
   },
   palette: {
-    primary: { main: colors.blue[800] }, // テーマの色
+    primary: { main: colors.pink[800] }, // テーマの色
   },
 });
 
@@ -110,30 +110,21 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "100vh",
       overflow: "auto",
     },
-    container: {
-      paddingTop: theme.spacing(4),
-      paddingBottom: theme.spacing(4),
-    },
     paper: {
       padding: theme.spacing(2),
       display: "flex",
       overflow: "auto",
       flexDirection: "column",
-    },
-    link: {
-      textDecoration: "none",
-      color: theme.palette.text.secondary,
-    },
+    }
   })
 );
 
 export interface GenericTemplateProps {
   children: React.ReactNode;
+  subHeader?: React.ReactNode;
 }
 
-export const GenericTemplate: React.FC<GenericTemplateProps> = ({
-  children,
-}) => {
+export const GenericTemplate: React.FC<GenericTemplateProps> = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -162,7 +153,7 @@ export const GenericTemplate: React.FC<GenericTemplateProps> = ({
                 open && classes.menuButtonHidden
               )}
             >
-              <MenuIcon />
+            <MenuIcon />
             </IconButton>
             <Typography className={classes.title}></Typography>
             <AccountCircleOutlinedIcon />
@@ -183,9 +174,10 @@ export const GenericTemplate: React.FC<GenericTemplateProps> = ({
           <Divider />
           <SideMenu />
         </Drawer>
+
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Container maxWidth="lg" className={classes.container}>
+          <Container maxWidth="lg">
             <Typography
               component="h2"
               variant="h5"
@@ -193,8 +185,10 @@ export const GenericTemplate: React.FC<GenericTemplateProps> = ({
               noWrap
               className={classes.pageTitle}
             >
+              {/* SubHeader */}
+            {props?.subHeader}
             </Typography>
-            {children}
+            {props.children}
           </Container>
         </main>
       </div>
