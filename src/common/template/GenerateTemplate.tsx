@@ -16,6 +16,7 @@ import clsx from "clsx";
 import React from "react";
 
 import { SideMenu } from "./Menu";
+import { Container, Grid } from "@material-ui/core";
 
 const drawerWidth = 240;
 
@@ -50,12 +51,19 @@ const useStyles = makeStyles((theme: Theme) =>
     toolbar: {
       paddingRight: 24,
     },
+    rightToolbar: {
+      marginLeft: "auto",
+      marginRight: -12
+    },
     toolbarIcon: {
       display: "flex",
       alignItems: "center",
       justifyContent: "flex-end",
       padding: "0 8px",
       ...theme.mixins.toolbar,
+    },
+    subHeader: {
+      minHeight: "36px"
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
@@ -174,8 +182,16 @@ export const GenericTemplate: React.FC<GenericTemplateProps> = (props) => {
 
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          {props?.subHeader}
-          {props.children}
+          <Toolbar className={classes.subHeader}>
+            <section className={classes.rightToolbar}>
+              {props?.subHeader}
+            </section>
+          </Toolbar>
+          <Container maxWidth="lg">
+            <Grid container spacing={2}>
+              {props.children}
+            </Grid>
+          </Container>
         </main>
       </div>
     </ThemeProvider>

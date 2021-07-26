@@ -28,6 +28,7 @@ export const Login = () => {
   };
 
   const onLogin = () => 
+    // TODO: リファクタリング. Promise返すようにする
     loginService.login(new LoginRequest(email, name), () => history.push('/home'))
 
   return (

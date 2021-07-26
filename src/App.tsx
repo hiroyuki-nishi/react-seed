@@ -7,7 +7,6 @@ import './App.css';
 import { Device } from './device/Device';
 import { NotFound } from './error/NotFound';
 // import { Header } from './header/Header';
-import { LoopComponent } from './loop/Loop';
 
 
 const App: React.FC = () => {
@@ -22,9 +21,6 @@ const App: React.FC = () => {
         </Route>
         <Route exact path="/home">
           <Device />
-        </Route>
-        <Route exact path="/loop">
-          <LoopComponent />
         </Route>
         <Route>
           <NotFound />
