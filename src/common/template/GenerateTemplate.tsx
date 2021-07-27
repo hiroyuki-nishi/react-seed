@@ -16,6 +16,7 @@ import React from "react";
 
 import { SideMenu } from "./Menu";
 import { Container, Grid, Menu, MenuItem } from "@material-ui/core";
+import {useHistory} from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -112,82 +113,84 @@ export interface GenericTemplateProps {
 }
 
 export const GenericTemplate: React.FC<GenericTemplateProps> = (props) => {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+    const history = useHistory();
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(true);
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleDrawerOpen = () => setOpen(true);
-  const handleDrawerClose = () => setOpen(false);
-  const handleClick = (event: any) => setAnchorEl(event.currentTarget);
-  const handleClose = () => setAnchorEl(null);
+    const handleDrawerOpen = () => setOpen(true);
+    const handleDrawerClose = () => setOpen(false);
+    const handleClick = (event: any) => setAnchorEl(event.currentTarget);
+    const handleClose = () => setAnchorEl(null);
+    const onLogout = () => history.push("/");
 
-  return (
-    <ThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar
-          position="absolute"
-          className={clsx(classes.appBar, open && classes.appBarShift)}
-        >
-          <Toolbar className={classes.toolbar}>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              className={clsx(
-                classes.menuButton,
-                open && classes.menuButtonHidden
-              )}
-            >
-            <MenuIcon />
-            </IconButton>
-            <Typography className={classes.title}></Typography>
-            <IconButton color="inherit" onClick={handleClick} >
-              <AccountCircleOutlinedIcon />
-            </IconButton>
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>アカウント設定</MenuItem>
-              <MenuItem onClick={handleClose}>ログアウト</MenuItem>
-            </Menu>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-          }}
-          open={open}
-        >
-          <div className={classes.toolbarIcon}>
-            <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <SideMenu />
-        </Drawer>
+    return (
+        <ThemeProvider theme={theme}>
+            <div className={classes.root}>
+                <CssBaseline />
+                <AppBar
+                    position="absolute"
+                    className={clsx(classes.appBar, open && classes.appBarShift)}
+                >
+                    <Toolbar className={classes.toolbar}>
+                        <IconButton
+                            edge="start"
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            className={clsx(
+                                classes.menuButton,
+                                open && classes.menuButtonHidden
+                            )}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography className={classes.title}></Typography>
+                        <IconButton color="inherit" onClick={handleClick} >
+                            <AccountCircleOutlinedIcon />
+                        </IconButton>
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                        >
+                            <MenuItem onClick={handleClose}>アカウント設定</MenuItem>
+                            <MenuItem onClick={onLogout}>ログアウト</MenuItem>
+                        </Menu>
+                    </Toolbar>
+                </AppBar>
+                <Drawer
+                    variant="permanent"
+                    classes={{
+                        paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+                    }}
+                    open={open}
+                >
+                    <div className={classes.toolbarIcon}>
+                        <IconButton onClick={handleDrawerClose}>
+                            <ChevronLeftIcon />
+                        </IconButton>
+                    </div>
+                    <Divider />
+                    <SideMenu />
+                </Drawer>
 
-        <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
-          <Toolbar className={classes.subHeader}>
-            <section className={classes.rightToolbar}>
-              {props?.subHeader}
-            </section>
-          </Toolbar>
-          <Container maxWidth="lg">
-            <Grid container spacing={2}>
-              {props.children}
-            </Grid>
-          </Container>
-        </main>
-      </div>
-    </ThemeProvider>
-  );
+                <main className={classes.content}>
+                    <div className={classes.appBarSpacer} />
+                    <Toolbar className={classes.subHeader}>
+                        <section className={classes.rightToolbar}>
+                            {props?.subHeader}
+                        </section>
+                    </Toolbar>
+                    <Container maxWidth="lg">
+                        <Grid container spacing={2}>
+                            {props.children}
+                        </Grid>
+                    </Container>
+                </main>
+            </div>
+        </ThemeProvider>
+    );
 };
