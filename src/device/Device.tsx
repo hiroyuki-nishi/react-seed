@@ -9,28 +9,24 @@ import { DeviceGrid } from "./DeviceGrid";
 
 
 export const Device = () => {
-  const [hidden, setHidden] = useState(true);
+  const [showCards, setShowCards] = useState(true);
   const [open, setOpenDialog] = useState(false);
-  const deviceCards = [...Array(6)].map(_ => {
-    return (
-      <Grid item xs={4}><DeviceCard /></Grid>
-    )
-  })
   const onOpenDialog = () => setOpenDialog(true)
   const onCloseDialog = () => setOpenDialog(false)
+  const deviceCards = [...Array(6)].map(_ =>
+    <Grid item xs={4}><DeviceCard onMediaClick={onOpenDialog} /></Grid>)
 
   return (
     <GenericTemplate subHeader={
       <>
         {/* TODO: 部品化する */}
-        <IconButton color="inherit" onClick={() => setHidden(!hidden)}>
+        <IconButton color="inherit" onClick={() => setShowCards(!showCards)}>
           <CodeIcon />
         </IconButton>
       </>
-     }>
-     { hidden ? deviceCards : <DeviceGrid /> }
-     <button onClick={onOpenDialog}></button>
-      <FullScreanDialog open={open} close={onCloseDialog}/>
+    }>
+      {showCards ? deviceCards : <DeviceGrid />}
+      <FullScreanDialog open={open} close={onCloseDialog} />
     </GenericTemplate>
   );
 };
