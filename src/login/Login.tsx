@@ -1,4 +1,5 @@
 import { Grid } from '@material-ui/core';
+import { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -8,11 +9,14 @@ import { LoginRequest } from '../common/model/LoginModel';
 import { LoginService } from '../common/service/LoginService';
 
 
-export const Login = () => {
+export const Login: () => JSX.Element = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const history = useHistory();
   const loginService = new LoginService()
+
+  // TODO
+  localStorage.clear();
 
   const formChange = (formName: string, value: string) => {
     switch (formName) {
@@ -28,8 +32,18 @@ export const Login = () => {
   };
 
   const onLogin = () => 
-    // TODO: リファクタリング. Promise返すようにする
-    loginService.login(new LoginRequest(email, name), () => history.push('/device'))
+    loginService.login(new LoginRequest(email, name))
+      .then((response) =>  console.log(response.data))
+      .catch((error: AxiosError) => {
+        console.log(error)
+        moveLogin()
+      })
+
+  const moveLogin = () => {
+    // TODO
+    localStorage.setItem("token", "true");
+    history.push('/device');
+  }
 
   return (
     <>

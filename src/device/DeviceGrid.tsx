@@ -1,5 +1,9 @@
 import { DataGrid, GridColDef, GridValueGetterParams } from '@material-ui/data-grid';
 
+export interface GridProps {
+  onRowClick?: () => void
+}
+
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 90 },
   {
@@ -46,7 +50,8 @@ const rows = [
   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ];
 
-export const DeviceGrid = () => {
+// TODO: 部品化
+export const MaterialGrid = (props: GridProps) => {
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
@@ -55,6 +60,7 @@ export const DeviceGrid = () => {
         pageSize={5}
         checkboxSelection
         disableSelectionOnClick
+        onRowClick={props?.onRowClick}
       />
     </div>
   );

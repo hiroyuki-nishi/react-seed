@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import { Login } from './login/Login';
+import { AuthenticateRoute } from './common/router/PrivateRoute';
 
+import { Login } from './login/Login';
 import './App.css';
 import { Device } from './device/Device';
 import { NotFound } from './error/NotFound';
@@ -19,9 +20,7 @@ const App: React.FC = () => {
             <Login />
           </div>
         </Route>
-        <Route exact path="/device">
-          <Device />
-        </Route>
+        <AuthenticateRoute path="/device" children={<Device />} />
         <Route>
           <NotFound />
         </Route>

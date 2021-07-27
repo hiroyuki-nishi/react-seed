@@ -5,7 +5,7 @@ import { useState } from "react";
 import { FullScreanDialog } from "../common/dialog/FullScreanDialog";
 import { GenericTemplate } from "../common/template/GenerateTemplate";
 import { DeviceCard } from "./DeviceCard";
-import { DeviceGrid } from "./DeviceGrid";
+import { MaterialGrid } from "./DeviceGrid";
 
 
 export const Device = () => {
@@ -25,7 +25,7 @@ export const Device = () => {
         </IconButton>
       </>
     }>
-      {showCards ? deviceCards : <DeviceGrid />}
+      {showCards ? deviceCards : <MaterialGrid onRowClick={onOpenDialog}/>}
       <FullScreanDialog open={open} close={onCloseDialog} />
     </GenericTemplate>
   );

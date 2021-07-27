@@ -1,16 +1,11 @@
-import axios, { AxiosError } from 'axios';
-
+import axios, { AxiosResponse } from 'axios';
 import { ILoginResponse, LoginRequest } from "../model/LoginModel";
 
+
 export class LoginService {
-  login(request: LoginRequest, f: () => void): void {
+  login(request: LoginRequest): Promise<AxiosResponse<ILoginResponse>> {
     console.log(request);
-    axios.get<ILoginResponse>('http://localhost:9999/login')
-      .then((response) => {
-        console.log(response.data);
-        f();
-      })
-      .catch((error: AxiosError) => console.log(error))
+    return axios.get<ILoginResponse>('http://localhost:9999/login')
   }
 }
 
