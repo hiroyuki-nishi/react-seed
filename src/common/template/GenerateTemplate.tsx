@@ -1,28 +1,27 @@
+import { Container, Grid, Menu, MenuItem } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
-import * as colors from "@material-ui/core/colors";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
-import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import { createMuiTheme, createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MenuIcon from "@material-ui/icons/Menu";
 import { ThemeProvider } from "@material-ui/styles";
 import clsx from "clsx";
 import React from "react";
-
+import { useHistory } from "react-router-dom";
 import { SideMenu } from "./Menu";
-import { Container, Grid, Menu, MenuItem } from "@material-ui/core";
-import {useHistory} from "react-router-dom";
+
 
 const drawerWidth = 240;
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: colors.pink[800] }, // テーマの色
+    // primary: { main: colors.pink[800] }, // テーマの色
   },
 });
 
@@ -113,8 +112,8 @@ export interface GenericTemplateProps {
 }
 
 export const GenericTemplate: React.FC<GenericTemplateProps> = (props) => {
-    const history = useHistory();
     const classes = useStyles();
+    const history = useHistory();
     const [open, setOpen] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
 

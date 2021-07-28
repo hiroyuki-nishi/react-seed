@@ -3,6 +3,7 @@ import { TextField } from '@material-ui/core';
 
 interface MaterialInputProps {
   formName: string;
+  fullWidth?: boolean;
   inputProps?: { maxLength: number, pattern?: string }
   label: string;
   variant: "standard" | "filled" | "outlined" | undefined;
@@ -19,6 +20,7 @@ export const MaterialInput = (props: MaterialInputProps) => {
   };
 
   return (<TextField
+    fullWidth={props?.fullWidth}
     inputProps={props?.inputProps}
     label={props.label}
     variant={props.variant}
