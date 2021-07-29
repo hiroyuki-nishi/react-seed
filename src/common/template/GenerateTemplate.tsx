@@ -14,6 +14,8 @@ import { ThemeProvider } from "@material-ui/styles";
 import clsx from "clsx";
 import React from "react";
 import { useHistory } from "react-router-dom";
+
+import { MaterialProgress } from "../progress/MaterialProgress";
 import { SideMenu } from "./Menu";
 
 
@@ -108,6 +110,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export interface GenericTemplateProps {
   children: React.ReactNode;
+  loading?: boolean;
   subHeader?: React.ReactNode;
 }
 
@@ -178,6 +181,7 @@ export const GenericTemplate: React.FC<GenericTemplateProps> = (props) => {
 
                 <main className={classes.content}>
                     <div className={classes.appBarSpacer} />
+                    <MaterialProgress visible={true} />
                     <Toolbar className={classes.subHeader}>
                         <section className={classes.rightToolbar}>
                             {props?.subHeader}
