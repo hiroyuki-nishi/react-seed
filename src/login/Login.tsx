@@ -8,6 +8,7 @@ import { MaterialCard } from '../common/card/MaterialCard';
 import { MaterialInput } from '../common/input/MaterialInput';
 import { MaterialInputPassowrd } from '../common/input/MaterialInputPassoword';
 import { LoginRequest } from '../common/model/LoginModel';
+import { MaterialProgress } from '../common/progress/MaterialProgress';
 import { LoginService } from '../common/service/LoginService';
 
 
@@ -66,6 +67,7 @@ export const Login: () => JSX.Element = () => {
       <div className={classes.center}>
       <Grid container direction="column" alignItems="center" justify="center">
         <Grid item xs={8}>
+          <MaterialProgress visible={true} />
           <MaterialCard
             content={
               <form noValidate autoComplete="off">
