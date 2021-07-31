@@ -35,6 +35,9 @@ export const DeviceCard = (props: DeviceCardProps) => {
           <Typography gutterBottom variant="h5" component="h2">
             {props.device.title}
           </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {props.device.os}
+          </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>

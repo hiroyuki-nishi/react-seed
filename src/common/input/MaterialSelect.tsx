@@ -1,26 +1,44 @@
 import { FormControl, MenuItem, Select } from "@material-ui/core"
 import { useState } from "react";
+import { makeStyles } from '@material-ui/core/styles';
 
-export const MaterialSelect = () => {
-  const [age, setAge] = useState('');
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setAge(event.target.value as string);
-  };
+export class Item {
+  constructor(
+    public readonly value: any,
+    public readonly text: string
+  ) {}
+}
+export interface MaterialSelectProps {
+  items: Item[];
+  handleChange:(event: React.ChangeEvent<{ value: unknown }>) => void
+}
+
+const useStyles = makeStyles({
+  select: {
+    width: 140,
+  },
+});
+
+export const MaterialSelect = (props: MaterialSelectProps) => {
+  const classes = useStyles();
+  const [age] = useState('');
+
+  const menuItems = props.items.map(item => <MenuItem value={item.value}>{item.text}</MenuItem>)
+
 
   return (
     <FormControl>
       <Select
-        value={age}
-        onChange={handleChange}
+        className={classes.select}
         displayEmpty
         inputProps={{ 'aria-label': 'Without label' }}
+        onChange={props.handleChange}
+        value={age}
       >
         <MenuItem value="">
-          <em>None</em>
+          <em>すべて</em>
         </MenuItem>
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
+        {menuItems}
       </Select>
     </FormControl>
   )

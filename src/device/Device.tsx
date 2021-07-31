@@ -5,7 +5,7 @@ import { useState } from "react";
 import { MaterialButton } from "../common/button/MaterialButton";
 import { FullScreanDialog } from "../common/dialog/FullScreanDialog";
 import { MaterialInput } from "../common/input/MaterialInput";
-import { MaterialSelect } from "../common/input/MaterialSelect";
+import { Item, MaterialSelect } from "../common/input/MaterialSelect";
 import { GenericTemplate } from "../common/template/GenerateTemplate";
 import { DeviceCard } from "./DeviceCard";
 import { MaterialGrid } from "./DeviceGrid";
@@ -13,15 +13,21 @@ import { DeviceModel } from "./DeviceModel";
 
 
 export const Device = () => {
+  const originDevices = [...Array(50)].map((_, i) =>
+    new DeviceModel("ITEM " + i.toString(), i % 2 === 0 ? "IOS" : "Android"))
   const [showCards, setShowCards] = useState(true);
   const [open, setOpenDialog] = useState(false);
-  const [device, setDevice] = useState(new DeviceModel(""));
+  // TODO: 
+  const [device, setDevice] = useState(new DeviceModel("", ""));
+  const [devices, setDevices] = useState(originDevices);
 
+  const SELECT_ITEMS = [
+    new Item("IOS", "IOS"), // TODO: enumにする
+    new Item("Android", "Android")
+  ]
   const FORM_KEYS = {
     NAME: 'name',
   }
-  const deviceCards = [...Array(300)].map((_, i) => new DeviceModel("ITEM " + i.toString())).map(device =>
-    <Grid item xs={4}><DeviceCard device={device} onMediaClick={(device: DeviceModel) => onOpenDialog(device)} /></Grid>)
 
   const onOpenDialog = (device: DeviceModel) => {
     setDevice(device)
@@ -30,6 +36,10 @@ export const Device = () => {
   const onCloseDialog = () => setOpenDialog(false)
   const onRental= () => {
     console.info("レンタル！")
+  }
+  const onSelectHandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    console.log(event.target.value)
+    setDevices(originDevices.filter(x => x.os === event.target.value))
   }
 
   const formChange = (formName: string) => {
@@ -41,11 +51,23 @@ export const Device = () => {
         console.log('key not found');
     }
   };
+  const createCards = (devices: DeviceModel[]) => {
+    console.log(devices)
+    return devices.map(device =>
+      <Grid item xs={4}>
+        <DeviceCard device={device} onMediaClick={(device: DeviceModel) => onOpenDialog(device)} />
+      </Grid>
+    )
+  }
+
 
   return (
     <GenericTemplate
       subHeaderLeft={
-        <MaterialSelect />
+        <MaterialSelect
+          items={SELECT_ITEMS}
+          handleChange={onSelectHandleChange}
+        />
       }
       subHeader={
         <>
@@ -55,7 +77,7 @@ export const Device = () => {
           </IconButton>
         </>
       }>
-      {showCards ? deviceCards : <MaterialGrid onRowClick={() => onOpenDialog(new DeviceModel(""))}/>}
+      {showCards ? createCards(devices) : <MaterialGrid onRowClick={() => onOpenDialog(new DeviceModel("", ""))}/>}
       <FullScreanDialog
         content={
           <MaterialInput
