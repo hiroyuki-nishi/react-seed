@@ -6,6 +6,7 @@ import { MaterialButton } from "../common/button/MaterialButton";
 import { FullScreanDialog } from "../common/dialog/FullScreanDialog";
 import { MaterialInput } from "../common/input/MaterialInput";
 import { Item, MaterialSelect } from "../common/input/MaterialSelect";
+import { MaterialSnackbar } from "../common/snackbar/MaterialSnackbar";
 import { GenericTemplate } from "../common/template/GenerateTemplate";
 import { DeviceCard } from "./DeviceCard";
 import { MaterialGrid } from "./DeviceGrid";
@@ -52,7 +53,6 @@ export const Device = () => {
     }
   };
   const createCards = (devices: DeviceModel[]) => {
-    console.log(devices)
     return devices.map(device =>
       <Grid item xs={4}>
         <DeviceCard device={device} onMediaClick={(device: DeviceModel) => onOpenDialog(device)} />
@@ -77,6 +77,7 @@ export const Device = () => {
           </IconButton>
         </>
       }>
+      <MaterialSnackbar />
       {showCards ? createCards(devices) : <MaterialGrid onRowClick={() => onOpenDialog(new DeviceModel("", ""))}/>}
       <FullScreanDialog
         content={
