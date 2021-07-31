@@ -18,6 +18,7 @@ export const Device = () => {
     new DeviceModel("ITEM " + i.toString(), i % 2 === 0 ? "IOS" : "Android"))
   const [showCards, setShowCards] = useState(true);
   const [open, setOpenDialog] = useState(false);
+  const [rental, setRental] = useState(false);
   // TODO: 
   const [device, setDevice] = useState(new DeviceModel("", ""));
   const [devices, setDevices] = useState(originDevices);
@@ -37,12 +38,14 @@ export const Device = () => {
   const onCloseDialog = () => setOpenDialog(false)
   const onRental= () => {
     console.info("レンタル！")
+    setRental(true);
   }
   const onSelectHandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     console.log(event.target.value)
     setDevices(originDevices.filter(x => x.os === event.target.value))
   }
 
+  // TODO
   const formChange = (formName: string) => {
     switch (formName) {
       case FORM_KEYS.NAME:
@@ -60,8 +63,8 @@ export const Device = () => {
     )
   }
 
-
   return (
+    <>
     <GenericTemplate
       subHeaderLeft={
         <MaterialSelect
@@ -77,7 +80,6 @@ export const Device = () => {
           </IconButton>
         </>
       }>
-      <MaterialSnackbar />
       {showCards ? createCards(devices) : <MaterialGrid onRowClick={() => onOpenDialog(new DeviceModel("", ""))}/>}
       <FullScreanDialog
         content={
@@ -97,5 +99,8 @@ export const Device = () => {
         title={device.title}
         close={onCloseDialog} />
     </GenericTemplate>
+    {/* TODO: 一番上に持っていく */}
+    <MaterialSnackbar message="レンタルしました。" open={rental} handleClose={() => setRental(false)}/>
+    </>
   );
 };
