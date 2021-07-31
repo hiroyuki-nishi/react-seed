@@ -6,10 +6,11 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
-import { MaterialButton } from '../common/button/MaterialButton';
+import { DeviceModel } from './DeviceModel';
 
 export interface DeviceCardProps {
-  onMediaClick: () => void
+  device: DeviceModel;
+  onMediaClick: (device: DeviceModel) => void
 }
 
 const useStyles = makeStyles({
@@ -27,20 +28,16 @@ export const DeviceCard = (props: DeviceCardProps) => {
         <CardMedia
           className={classes.media}
           image="/static/images/cards/contemplative-reptile.jpg"
-          onClick={props.onMediaClick}
+          onClick={() => props.onMediaClick(props.device)}
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            title
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            description
+            {props.device.title}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <MaterialButton text="レンタル" color="primary" onClick={() => console.log("click")}></MaterialButton>
       </CardActions>
     </Card>
   );

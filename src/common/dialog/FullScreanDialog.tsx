@@ -4,11 +4,13 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import React from 'react';
 
 
 export interface DialogProps {
+ actions?: React.ReactNode;
+ content?: React.ReactNode;
  open: boolean
+ title: string;
  close: () => void 
 }
 
@@ -23,21 +25,18 @@ export const FullScreanDialog = (props: DialogProps) => {
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
-        <DialogTitle id="scroll-dialog-title">Subscribe</DialogTitle>
+        <DialogTitle id="scroll-dialog-title">{props.title}</DialogTitle>
         <DialogContent dividers={true}>
           <DialogContentText
             id="scroll-dialog-description"
             tabIndex={-1}
           >
-            aaaaaa
+          {props?.content}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={props.close} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={props.close} color="primary">
-            Subscribe
+            {props?.actions}
           </Button>
         </DialogActions>
       </Dialog>

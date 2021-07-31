@@ -14,7 +14,6 @@ import { ThemeProvider } from "@material-ui/styles";
 import clsx from "clsx";
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { MaterialSelect } from "../input/MaterialSelect";
 
 import { MaterialProgress } from "../progress/MaterialProgress";
 import { SideMenu } from "./Menu";
@@ -113,6 +112,7 @@ export interface GenericTemplateProps {
   children: React.ReactNode;
   loading?: boolean;
   subHeader?: React.ReactNode;
+  subHeaderLeft?: React.ReactNode;
 }
 
 export const GenericTemplate: React.FC<GenericTemplateProps> = (props) => {
@@ -184,7 +184,7 @@ export const GenericTemplate: React.FC<GenericTemplateProps> = (props) => {
           <div className={classes.appBarSpacer} />
           <MaterialProgress visible={true} />
           <Toolbar className={classes.subHeader}>
-            <MaterialSelect />
+            {props?.subHeaderLeft}
             <section className={classes.rightToolbar}>
               {props?.subHeader}
             </section>
